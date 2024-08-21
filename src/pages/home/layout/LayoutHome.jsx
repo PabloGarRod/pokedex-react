@@ -3,15 +3,16 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { URL_POKEMON } from "../../../api/apiRest";
 import Header from "../header/Header";
+import Card from "../card/Card.jsx";
 import css from "./layout.module.scss";
 
 export default function LayoutHome() {
-  const [arrayPokemon, setArrayPokemon] = useState();
+  const [arrayPokemon, setArrayPokemon] = useState([]);
 
   useEffect(() => {
     const api = async () => {
       const apiPoke = await axios.get(`${URL_POKEMON}`);
-      console.log(apiPoke.data);
+
       setArrayPokemon(apiPoke.data.results);
     };
 
@@ -21,6 +22,11 @@ export default function LayoutHome() {
   return (
     <div style={css.layout}>
       <Header />
+      <div className={css.card_content}>
+        {arrayPokemon.map((card, index) => {
+          return <Card key={index} card={card} />;
+        })}
+      </div>
     </div>
   );
 }
