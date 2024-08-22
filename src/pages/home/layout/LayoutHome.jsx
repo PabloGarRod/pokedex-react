@@ -11,7 +11,7 @@ export default function LayoutHome() {
 
   useEffect(() => {
     const api = async () => {
-      const apiPoke = await axios.get(`${URL_POKEMON}`);
+      const apiPoke = await axios.get(`${URL_POKEMON}/?limit=151`);
 
       setArrayPokemon(apiPoke.data.results);
     };
