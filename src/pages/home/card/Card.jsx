@@ -99,7 +99,7 @@ export default function Card({ card }) {
       <div
         className={`bg-${speciesPokemon?.data?.color?.name} ${css.sub_card}`}
       >
-        <strong className={css.id_card}>{pokeId}</strong>
+        <strong className={css.id_card}>#{pokeId}</strong>
         <strong className={css.name_card}>{card.name}</strong>
         <h4 className={css.altura_poke}>
           Altura: {itemPokemon.height * 10} cms

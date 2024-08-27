@@ -11,12 +11,18 @@ export default function LayoutHome() {
   const [arrayPokemon, setArrayPokemon] = useState([]);
   const [page, setPage] = useState(1);
   const [globalPokemon, setGlobalPokemon] = useState();
+  const [search, setSearch] = useState();
 
   const limit = 15;
 
   const lastPage = Math.round(globalPokemon?.length / 15);
 
   const initPage = (page - 1) * limit;
+
+  const filterPokemons =
+    search?.length > 0
+      ? globalPokemon?.filter((pokemon) => pokemon?.name.includes(search))
+      : arrayPokemon;
 
   useEffect(() => {
     const api = async () => {
@@ -29,7 +35,7 @@ export default function LayoutHome() {
 
     api();
     getGlobalPokemons();
-  }, [page]);
+  }, [page, filterPokemons]);
 
   const getGlobalPokemons = async () => {
     const res = await axios.get(`${URL_POKEMON}?offset=0&limit=1500`);
@@ -54,24 +60,30 @@ export default function LayoutHome() {
     }
   };
 
+  const getSearch = (e) => {
+    const text = e.toLowerCase();
+    setSearch(text);
+    setPage(1);
+  };
+
   return (
     <div style={css.layout}>
-      <Header />
+      <Header getSearch={getSearch} />
       <section className={css.section_pagination}>
         <div className={css.div_pagination}>
-          <span className={css.item_izquierdo} onClick={previousPage}>
+          <span className={css.item_angle} onClick={previousPage}>
             <FaIcons.FaAngleLeft />
           </span>
           <span className={css.item}> {page} </span>
           <span className={css.item}> DE </span>
           <span className={css.item}> {lastPage} </span>
-          <span className={css.item_derecho} onClick={nextPage}>
+          <span className={css.item_angle} onClick={nextPage}>
             <FaIcons.FaAngleRight />
           </span>
         </div>
       </section>
       <div className={css.card_content}>
-        {arrayPokemon.map((card, index) => {
+        {filterPokemons.map((card, index) => {
           return <Card key={index} card={card} />;
         })}
       </div>
