@@ -6,3 +6,16 @@
   grid-gap: 25px;
   padding-bottom: 30px;
 }
+
+.section_pagination {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+
+  .div_pagination {
+    width: auto;
+    background-color: #5865f2;
+    display: flex;
+    border-radius: 8px;
+  }
+}

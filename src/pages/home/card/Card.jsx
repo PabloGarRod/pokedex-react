@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import { URL_POKEMON, URL_ESPECIES } from "../../../api/apiRest";
+import {
+  URL_POKEMON,
+  URL_ESPECIES,
+  URL_EVOLUCIONES,
+} from "../../../api/apiRest";
 
 import css from "./card.module.scss";
 
 export default function Card({ card }) {
   const [itemPokemon, setItemPokemon] = useState({});
   const [speciesPokemon, setSpeciesPokemon] = useState({});
-
-  console.log(speciesPokemon);
+  const [evolutions, setEvolutions] = useState([]);
 
   useEffect(() => {
     const dataPokemon = async () => {
@@ -17,17 +20,74 @@ export default function Card({ card }) {
       setItemPokemon(api.data);
     };
     dataPokemon();
-  }, []);
+  }, [card]);
 
   useEffect(() => {
-    const dataSpecies = async () => {
+    const getDataSpecies = async () => {
       const URL = card.url.split("/");
 
       const api = await axios.get(`${URL_ESPECIES}/${URL[6]}`);
-      setSpeciesPokemon(api.data);
+      setSpeciesPokemon({
+        url_specie: api?.data?.evolution_chain,
+        data: api.data,
+      });
     };
-    dataSpecies();
-  }, []);
+    getDataSpecies();
+  }, [card]);
+
+  useEffect(() => {
+    async function getPokemonImage(id) {
+      const response = await axios.get(`${URL_POKEMON}/${id}`);
+      return response?.data?.sprites?.other["official-artwork"]?.front_default;
+    }
+
+    if (speciesPokemon?.url_specie) {
+      const arrayEvolutions = [];
+      const getEvolutions = async () => {
+        const URL = speciesPokemon?.url_specie?.url.split("/");
+
+        const api = await axios.get(`${URL_EVOLUCIONES}/${URL[6]}`);
+
+        const url2 = api?.data?.chain?.species?.url?.split("/");
+
+        const img1 = await getPokemonImage(url2[6]);
+
+        arrayEvolutions.push({
+          img: img1,
+          name: api?.data?.chain?.species?.name,
+        });
+
+        if (api?.data?.chain?.evolves_to?.lenght !== 0) {
+          const data2 = api?.data?.chain?.evolves_to[0]?.species;
+          const id = data2?.url?.split("/")[6];
+          const img2 = await getPokemonImage(id);
+          arrayEvolutions.push({
+            img: img2,
+            name: data2.name,
+          });
+        }
+
+        if (api?.data?.chain?.evolves_to[0].evolves_to.lenght !== 0) {
+          const data3 = api?.data?.chain?.evolves_to[0]?.evolves_to[0]?.species;
+          const id = data3?.url?.split("/")[6];
+          if (id) {
+            const img3 = await getPokemonImage(id);
+            arrayEvolutions.push({
+              img: img3,
+              name: data3.name,
+            });
+          }
+        }
+
+        setEvolutions(arrayEvolutions);
+      };
+      getEvolutions();
+    }
+  }, [speciesPokemon]);
+
+  let pokeId = itemPokemon?.id?.toString();
+
+  pokeId = "0".repeat(3 - pokeId?.length) + pokeId;
 
   return (
     <div className={css.card}>
@@ -36,15 +96,17 @@ export default function Card({ card }) {
         src={itemPokemon.sprites?.other["official-artwork"].front_default}
         alt="pokemon"
       />
-      <div className={`bg-${speciesPokemon?.color?.name} ${css.sub_card}`}>
-        <strong className={css.id_card}>{itemPokemon.id}</strong>
+      <div
+        className={`bg-${speciesPokemon?.data?.color?.name} ${css.sub_card}`}
+      >
+        <strong className={css.id_card}>{pokeId}</strong>
         <strong className={css.name_card}>{card.name}</strong>
         <h4 className={css.altura_poke}>
           Altura: {itemPokemon.height * 10} cms
         </h4>
         <h4 className={css.peso_poke}>Peso: {itemPokemon.weight / 10} kgs</h4>
         <h4 className={css.habitat_poke}>
-          Habitat: {speciesPokemon?.habitat?.name}
+          Habitat: {speciesPokemon?.data?.habitat?.name}
         </h4>
         <div className={css.div_stats}>
           {itemPokemon?.stats?.map((stat, index) => {
@@ -66,6 +128,16 @@ export default function Card({ card }) {
               >
                 {type.type.name}
               </h6>
+            );
+          })}
+        </div>
+        <div className={css.div_evolution}>
+          {evolutions.map((evol, index) => {
+            return (
+              <div key={index} className={css.item_evol}>
+                <img src={evol.img} alt="evolution" className={css.img_evol} />
+                <h6>{evol.name}</h6>
+              </div>
             );
           })}
         </div>
