@@ -10,12 +10,12 @@ function Header({ getSearch }) {
         <div className={css.div_logo}>
           <img src={logo} alt="logo-pokemon" />
         </div>
-        <div className={css.div_search}>
+        {/* <div className={css.div_search}>
           <div>
             <FaIcons.FaSearch />
           </div>
           <input type="search" onChange={(e) => getSearch(e.target.value)} />
-        </div>
+        </div> */}
       </div>
     </nav>
   );

@@ -35,7 +35,7 @@ export default function LayoutHome() {
 
     api();
     getGlobalPokemons();
-  }, [page, filterPokemons]);
+  }, [page]);
 
   const getGlobalPokemons = async () => {
     const res = await axios.get(`${URL_POKEMON}?offset=0&limit=1500`);

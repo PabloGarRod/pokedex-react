@@ -1,8 +1,53 @@
-# React + Vite
+# 🧿 Pokédex React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Una Pokédex web hecha con **React + Vite**, que consume datos en tiempo real desde la [PokéAPI](https://pokeapi.co/). Permite buscar, explorar y visualizar información detallada de los Pokémon.
 
-Currently, two official plugins are available:
+![Badge React](https://img.shields.io/badge/React-18.x-blue?logo=react)
+![Badge Vite](https://img.shields.io/badge/Vite-5.x-purple?logo=vite)
+![Badge License](https://img.shields.io/badge/license-MIT-green)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
+
+## 📸 Capturas
+
+![Captura de la Pokédex](./public/screenshot.png)
+
+---
+
+## 🚀 Funcionalidades
+
+- 🔍 **Búsqueda** de Pokémon por nombre o ID
+- 📄 **Vista detallada** con imagen, tipo, habilidades y estadísticas
+- 📱 **Responsive design** para móviles y escritorio
+- ⚡ **Carga dinámica** desde la PokéAPI
+- 🧰 **Código limpio y organizado** con ESLint y SCSS
+
+---
+
+## 🧪 Stack técnico
+
+| Tecnología      | Descripción                                |
+| --------------- | ------------------------------------------ |
+| **React 18**    | Librería principal para construir la UI    |
+| **Vite 5**      | Bundler y entorno de desarrollo rápido     |
+| **Axios**       | Cliente HTTP para llamadas a la PokéAPI    |
+| **Sass (SCSS)** | Preprocesador CSS                          |
+| **ESLint**      | Linter de código JavaScript/React          |
+| **React Icons** | Íconos SVG listos para usar                |
+| **RxJS**        | (¡Interesante!) Librería reactiva opcional |
+
+---
+
+## 📦 Instalación
+
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/PabloGarRod/pokedex-react.git
+cd pokedex-react
+
+# 2. Instalar dependencias
+npm install
+
+# 3. Ejecutar el servidor de desarrollo
+npm run dev
+```

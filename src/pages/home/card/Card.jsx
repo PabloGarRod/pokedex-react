@@ -20,7 +20,7 @@ export default function Card({ card }) {
       setItemPokemon(api.data);
     };
     dataPokemon();
-  }, [card]);
+  }, [card.name]);
 
   useEffect(() => {
     const getDataSpecies = async () => {
@@ -33,7 +33,7 @@ export default function Card({ card }) {
       });
     };
     getDataSpecies();
-  }, [card]);
+  }, [card.name]);
 
   useEffect(() => {
     async function getPokemonImage(id) {
