@@ -26,15 +26,13 @@ Una Pokédex web hecha con **React + Vite**, que consume datos en tiempo real de
 
 ## 🧪 Stack técnico
 
-| Tecnología      | Descripción                                |
-| --------------- | ------------------------------------------ |
-| **React 18**    | Librería principal para construir la UI    |
-| **Vite 5**      | Bundler y entorno de desarrollo rápido     |
-| **Axios**       | Cliente HTTP para llamadas a la PokéAPI    |
-| **Sass (SCSS)** | Preprocesador CSS                          |
-| **ESLint**      | Linter de código JavaScript/React          |
-| **React Icons** | Íconos SVG listos para usar                |
-| **RxJS**        | (¡Interesante!) Librería reactiva opcional |
+| Tecnología      | Descripción                             |
+| --------------- | --------------------------------------- |
+| **React 18**    | Librería principal para construir la UI |
+| **Vite 5**      | Bundler y entorno de desarrollo rápido  |
+| **Axios**       | Cliente HTTP para llamadas a la PokéAPI |
+| **Sass (SCSS)** | Preprocesador CSS                       |
+| **ESLint**      | Linter de código JavaScript/React       |
 
 ---
 
