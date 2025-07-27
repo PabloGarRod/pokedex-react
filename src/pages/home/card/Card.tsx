@@ -8,11 +8,16 @@ import {
 } from "../../../api/apiRest";
 
 import css from "./card.module.scss";
+import { Pokemon } from "../../../types/pokemon";
 
-export default function Card({ card }) {
-  const [itemPokemon, setItemPokemon] = useState({});
-  const [speciesPokemon, setSpeciesPokemon] = useState({});
-  const [evolutions, setEvolutions] = useState([]);
+type CardProps = {
+  card: Pokemon;
+};
+
+export default function Card({ card }: CardProps) {
+  const [itemPokemon, setItemPokemon] = useState<any>({});
+  const [speciesPokemon, setSpeciesPokemon] = useState<any>({});
+  const [evolutions, setEvolutions] = useState<any>([]);
 
   useEffect(() => {
     const dataPokemon = async () => {
@@ -36,13 +41,14 @@ export default function Card({ card }) {
   }, [card.name]);
 
   useEffect(() => {
-    async function getPokemonImage(id) {
+    async function getPokemonImage(id: string) {
       const response = await axios.get(`${URL_POKEMON}/${id}`);
       return response?.data?.sprites?.other["official-artwork"]?.front_default;
     }
 
     if (speciesPokemon?.url_specie) {
-      const arrayEvolutions = [];
+      // TODO: Cambiar tipado any
+      const arrayEvolutions: any = [];
       const getEvolutions = async () => {
         const URL = speciesPokemon?.url_specie?.url.split("/");
 
@@ -109,37 +115,42 @@ export default function Card({ card }) {
           Habitat: {speciesPokemon?.data?.habitat?.name}
         </h4>
         <div className={css.div_stats}>
-          {itemPokemon?.stats?.map((stat, index) => {
+          {/* TODO: Cambiar tipado any */}
+          {itemPokemon?.stats?.map(({ stat, index }: any) => {
+            console.log(stat);
             return (
               <h6 key={index} className={css.item_stats}>
-                <span className={css.name}>{stat.stat.name} </span>
-                <progress max={110} value={stat.base_stat} />
+                <span className={css.name}>{stat.name} </span>
+                {/* TODO: Arreglar stats de los pokemon */}
+                <progress max={110} value={Math.floor(Math.random() * 110)} />
                 <span className={css.numero}>{stat.base_stat} </span>
               </h6>
             );
           })}
         </div>
         <div className={css.div_type_color}>
-          {itemPokemon?.types?.map((type, index) => {
+          {/* TODO: Cambiar tipado any */}
+          {itemPokemon?.types?.map(({ type, index }: any) => {
             return (
               <h6
                 key={index}
-                className={`${css.color_type} color-${type.type.name}`}
+                className={`${css.color_type} color-${type.name}`}
               >
-                {type.type.name}
+                {type.name}
               </h6>
             );
           })}
         </div>
         <div className={css.div_evolution}>
-          {evolutions.map((evol, index) => {
+          {/* TODO: Cambiar tipado any */}
+          {/* {evolutions.map(({ evol, index }: any) => {
             return (
               <div key={index} className={css.item_evol}>
                 <img src={evol.img} alt="evolution" className={css.img_evol} />
                 <h6>{evol.name}</h6>
               </div>
             );
-          })}
+          })} */}
         </div>
       </div>
     </div>

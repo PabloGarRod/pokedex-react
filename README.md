@@ -1,5 +1,7 @@
 # 🧿 Pokédex React
 
+> ⚠️ **Nota:** Este proyecto está en proceso de mejora continua y aún contiene bugs pendientes de corregir. ¡Gracias por tu comprensión y paciencia!
+
 Una Pokédex web hecha con **React + Vite**, que consume datos en tiempo real desde la [PokéAPI](https://pokeapi.co/). Permite buscar, explorar y visualizar información detallada de los Pokémon.
 
 ![Badge React](https://img.shields.io/badge/React-18.x-blue?logo=react)
@@ -26,13 +28,14 @@ Una Pokédex web hecha con **React + Vite**, que consume datos en tiempo real de
 
 ## 🧪 Stack técnico
 
-| Tecnología      | Descripción                             |
-| --------------- | --------------------------------------- |
-| **React 18**    | Librería principal para construir la UI |
-| **Vite 5**      | Bundler y entorno de desarrollo rápido  |
-| **Axios**       | Cliente HTTP para llamadas a la PokéAPI |
-| **Sass (SCSS)** | Preprocesador CSS                       |
-| **ESLint**      | Linter de código JavaScript/React       |
+| Tecnología      | Descripción                                 |
+| --------------- | ------------------------------------------- |
+| **TypeScript**  | Superset de JavaScript para tipado estático |
+| **React 18**    | Librería principal para construir la UI     |
+| **Vite 5**      | Bundler y entorno de desarrollo rápido      |
+| **Axios**       | Cliente HTTP para llamadas a la PokéAPI     |
+| **Sass (SCSS)** | Preprocesador CSS                           |
+| **ESLint**      | Linter de código JavaScript/React           |
 
 ---
 
