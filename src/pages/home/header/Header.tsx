@@ -3,7 +3,11 @@ import * as FaIcons from "react-icons/fa";
 import css from "./header.module.scss";
 import logo from "../../../assets/pokemon.png";
 
-function Header({ getSearch }) {
+type HeaderProps = {
+  getSearch: (e: string) => void;
+};
+
+function Header({ getSearch }: HeaderProps) {
   return (
     <nav className={css.header}>
       <div className={css.div_header}>

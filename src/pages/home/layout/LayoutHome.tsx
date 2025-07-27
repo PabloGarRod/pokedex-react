@@ -6,12 +6,13 @@ import { URL_POKEMON } from "../../../api/apiRest";
 import Header from "../header/Header";
 import Card from "../card/Card.jsx";
 import css from "./layout.module.scss";
+import { Pokemon } from "../../../types/pokemon";
 
 export default function LayoutHome() {
   const [arrayPokemon, setArrayPokemon] = useState([]);
   const [page, setPage] = useState(1);
-  const [globalPokemon, setGlobalPokemon] = useState();
-  const [search, setSearch] = useState();
+  const [globalPokemon, setGlobalPokemon] = useState<Pokemon[]>([]);
+  const [search, setSearch] = useState<string | undefined>();
 
   const limit = 15;
 
@@ -20,7 +21,7 @@ export default function LayoutHome() {
   const initPage = (page - 1) * limit;
 
   const filterPokemons =
-    search?.length > 0
+    search && search.length > 0
       ? globalPokemon?.filter((pokemon) => pokemon?.name.includes(search))
       : arrayPokemon;
 
@@ -40,7 +41,7 @@ export default function LayoutHome() {
   const getGlobalPokemons = async () => {
     const res = await axios.get(`${URL_POKEMON}?offset=0&limit=1500`);
 
-    const promises = res.data.results.map((pokemon) => {
+    const promises = res.data.results.map((pokemon: Pokemon) => {
       return pokemon;
     });
 
@@ -60,14 +61,14 @@ export default function LayoutHome() {
     }
   };
 
-  const getSearch = (e) => {
+  const getSearch = (e: string) => {
     const text = e.toLowerCase();
     setSearch(text);
     setPage(1);
   };
 
   return (
-    <div style={css.layout}>
+    <div className={css.layout}>
       <Header getSearch={getSearch} />
       <section className={css.section_pagination}>
         <div className={css.div_pagination}>
